@@ -73,11 +73,29 @@
 
 function handleCredentialResponse(response) {
 
+  // 認証情報を受け取ったことを表示
   document.getElementById("result").innerHTML =
-    "<strong>Googleログイン成功！</strong><br>" +
-    "認証情報を受け取りました。";
+    "<strong>認証しました！</strong><br>" +
+    "ペア情報を確認しています……";
 
-  console.log(response);
+  // 新しく作ったGASのWebアプリURL
+  const gasUrl = "ここに新しいGASのウェブアプリURL";
+
+  // GASへPOSTするフォーム
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = gasUrl;
+  form.target = "_self";
+
+  const input = document.createElement("input");
+  input.type = "hidden";
+  input.name = "credential";
+  input.value = response.credential;
+
+  form.appendChild(input);
+  document.body.appendChild(form);
+
+  form.submit();
 }
 
 </script>
