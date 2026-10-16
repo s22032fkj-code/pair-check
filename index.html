@@ -3,10 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ペア確認</title>
+
+  <title>ペア確認システム</title>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      font-size: 24px;
+    }
+
+    #result {
+      margin-top: 25px;
+      padding: 15px;
+      background: #f0f4f8;
+      border-radius: 10px;
+    }
+  </style>
 </head>
+
 <body>
+
+<div class="container">
+
   <h1>ペア確認システム</h1>
-  <p>ここはテストページです。</p>
+
+  <p>
+    学校のGoogleアカウントでログインしてください。
+  </p>
+
+  <div id="g_id_onload"
+       data-client_id="1050061942682-r21qqgkuq30mj9m0jhj2uboct4po8aog.apps.googleusercontent.com"
+       data-callback="handleCredentialResponse"
+       data-auto_prompt="false">
+  </div>
+
+  <div class="g_id_signin"
+       data-type="standard"
+       data-size="large"
+       data-theme="outline"
+       data-text="signin_with"
+       data-shape="rectangular">
+  </div>
+
+  <div id="result">
+    まだログインしていません。
+  </div>
+
+</div>
+
+<script>
+
+function handleCredentialResponse(response) {
+
+  // Googleから認証結果を受け取った
+  console.log(response);
+
+  // 今はテストなので、ログイン成功だけ表示
+  document.getElementById("result").innerHTML =
+    "<strong>Googleログイン成功！</strong><br>" +
+    "認証情報を受け取りました。";
+
+}
+
+</script>
+
 </body>
 </html>
