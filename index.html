@@ -73,14 +73,26 @@
 
 function handleCredentialResponse(response) {
 
-  // Googleから認証結果を受け取った
-  console.log(response);
+  // GASのWebアプリURL
+  const gasUrl = "https://script.google.com/a/macros/gs.seito-fku.ed.jp/s/AKfycbxVW5JYQ3PX4xX4TQB1PB1oSaKJJFIQYgD-8AjKQtnmKqI77x-hrxT_49Hj30qPmpwOtw/exec";
 
-  // 今はテストなので、ログイン成功だけ表示
-  document.getElementById("result").innerHTML =
-    "<strong>Googleログイン成功！</strong><br>" +
-    "認証情報を受け取りました。";
+  // GASへPOSTするためのフォームを作る
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = gasUrl;
+  form.target = "_blank";
 
+  // Googleから受け取ったIDトークン
+  const input = document.createElement("input");
+  input.type = "hidden";
+  input.name = "credential";
+  input.value = response.credential;
+
+  form.appendChild(input);
+  document.body.appendChild(form);
+
+  // GASへ送信
+  form.submit();
 }
 
 </script>
