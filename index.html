@@ -80,7 +80,7 @@ function handleCredentialResponse(response) {
   const form = document.createElement("form");
   form.method = "POST";
   form.action = gasUrl;
-  form.target = "_blank";
+  form.target = "_self";
 
   // Googleから受け取ったIDトークン
   const input = document.createElement("input");
